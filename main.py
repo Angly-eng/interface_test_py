@@ -13,7 +13,7 @@ if __name__ == '__main__':
     path = r'D:\shanchu\interface_demo\excel_read\testcase_file\test_exce_main.py'
     pytest.main(['-vs', '--alluredir' ,'./result', '--clean-alluredir', path])
     # os.system("allure serve result")
-    os.system("allure generate ./result -o ./report --clean")
+    os.system("allure generate ./result -o ./report")
 
 
 
