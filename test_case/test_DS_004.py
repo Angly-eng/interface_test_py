@@ -8,7 +8,6 @@ from deepdiff import DeepDiff
 from intf_keywords.api_key import ApiKey
 # DS_004 商品详情-验证输入的商品ID不存在提示用户
 # 01 执行登陆获取token
-print(DeepDiff(s,a, i))
 @allure.title("DS_004 商品详情-验证输入的商品ID不存在提示用户")
 def test_01(fix_1):
     with allure.step("01 执行登陆获取token"):
