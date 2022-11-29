@@ -11,7 +11,7 @@ if __name__ == '__main__':
     # excel写测试用例
     pytest.main(['-vs', '--alluredir' ,'./result', '--clean-alluredir', r'D:\shanchu\interface_demo\excel_read\testcase_file\test_exce_main.py'])
     # os.system("allure serve result")
-    os.system("allure generate ./result -o ./report")
+    os.system("allure generate ./result -o ./report --clean")
 
 
 
