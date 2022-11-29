@@ -10,6 +10,7 @@ from intf_keywords.api_key import ApiKey
 
 @allure.title("DS_010 用户名为不超过7位，注册成功")
 def test_02():
+    print(f"======================正在执行{__name__}01=================")
     ak = ApiKey()
     data = {
         "accounts": "JOJO001",

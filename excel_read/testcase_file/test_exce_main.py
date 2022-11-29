@@ -16,6 +16,7 @@ def setup_module():
 # 读取并执行测试用例
 # 接受Excel读取的数据，参数化执行测试用例
 @pytest.mark.parametrize('data',readExcel(PATH, SHEET))
+@allure.epic("读取excel文件进行测试")
 def test_01(data):
     # 用例名
     allure.dynamic.title(data[11])

@@ -9,6 +9,7 @@ from intf_keywords.api_key import ApiKey
 @allure.title("DS_025 验证输入错误的用户名提示用户")
 def test_03():
 # DS_025 验证输入错误的用户名提示用户
+    print(f"======================正在执行{__name__}01=================")
     ak = ApiKey()
     with allure.step("DS_025 验证输入错误的用户名提示用户"):
         data = {

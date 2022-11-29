@@ -6,6 +6,7 @@ import requests
 
 # DS_144 取消订单-验证待支付的状态能正确取消-字符串
 # 01 执行登陆获取token
+print(f"======================正在执行{__name__}01=================")
 data = {
     "accounts": "zz",
     "pwd": "123456",
@@ -22,6 +23,7 @@ token = token_list[0]
 print(token)
 
 # 02 加入购物车
+print(f"======================正在执行{__name__}02=================")
 data = {
     "goods_id":"10",
     "spec": "",
@@ -37,19 +39,22 @@ params = {
 res  =requests.post(url="http://shop-xo.hctestedu.com/index.php?s=api/cart/save", params=params, json=data)
 
 # 03 查询购物车
+print(f"======================正在执行{__name__}03=================")
 params = {
     "application": "app",
     "application_client_type": "weixin",
     "token": token
 }
-res  = requests.get(url="http://shop-xo.hctestedu.com/index.php?s=api/cart/index", params=params, json=data)
+res = requests.get(url="http://shop-xo.hctestedu.com/index.php?s=api/cart/index", params=params, json=data)
 print(res.text)
 # 获取购物车id
+print(f"======================正在执行{__name__}04=================")
 cartid_list = jsonpath.jsonpath(res.json(),'$..id')
 cartid = cartid_list[0]
 print(cartid)
 
 # 04 提交订单
+print(f"======================正在执行{__name__}05=================")
 data = {
     "goods_id": 10,
     "buy_type": "cart",

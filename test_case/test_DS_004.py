@@ -10,11 +10,13 @@ from intf_keywords.api_key import ApiKey
 # 01 执行登陆获取token
 @allure.title("DS_004 商品详情-验证输入的商品ID不存在提示用户")
 def test_01(fix_1):
+    print(f"======================正在执行{__name__}01=================")
     with allure.step("01 执行登陆获取token"):
         ak, token = fix_1
         print(token)
 
 # 02 查询商品详情10是有的，101是没有的
+    print(f"======================正在执行{__name__}02=================")
     with allure.step("02 查询商品详情10是有的，101是没有的"):
         data = {
             "goods_id": 101

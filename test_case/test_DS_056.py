@@ -10,11 +10,13 @@ from intf_keywords.api_key import ApiKey
 def test_04(fix_1):
 # DS_056 删除购物车-能删除当前用户对应的购物车数据（多个）
 # 01 执行登陆获取token
+    print(f"======================正在执行{__name__}01=================")
     with allure.step("01 执行登陆获取token"):
         ak, token = fix_1
         print(token)
 
 # 02 加入一个商品到购物车
+    print(f"======================正在执行{__name__}02=================")
     with allure.step("# 02 加入一个商品到购物车"):
         data = {
             "goods_id":"10",
@@ -32,6 +34,7 @@ def test_04(fix_1):
         print(res.json())
 
 # 03 加入第二个商品到购物车
+    print(f"======================正在执行{__name__}03=================")
     with allure.step("03 加入第二个商品到购物车"):
         data = {
             "goods_id":"12",
@@ -49,6 +52,7 @@ def test_04(fix_1):
         print(res.json())
 
 # 03 查询购物车
+    print(f"======================正在执行{__name__}04=================")
     with allure.step("03 查询购物车"):
         params = {
             "application": "app",
@@ -65,6 +69,7 @@ def test_04(fix_1):
         print(id2)
 
 # 04 删除购物车
+    print(f"======================正在执行{__name__}05=================")
     with allure.step("04 删除购物车"):
         data = {
             "id": f"{id1},{id2}"
