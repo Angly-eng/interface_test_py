@@ -9,7 +9,9 @@ if __name__ == '__main__':
     # os.system("allure serve result")
 
     # excel写测试用例
-    pytest.main(['-vs', '--alluredir' ,'./result', '--clean-alluredir', r'D:\shanchu\interface_demo\excel_read\testcase_file\test_exce_main.py'])
+    # excel文件地址
+    path = r'D:\shanchu\interface_demo\excel_read\testcase_file\test_exce_main.py'
+    pytest.main(['-vs', '--alluredir' ,'./result', '--clean-alluredir', path])
     # os.system("allure serve result")
     os.system("allure generate ./result -o ./report --clean")
 
