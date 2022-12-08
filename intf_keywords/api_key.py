@@ -4,7 +4,10 @@ import requests
 import json
 import jsonpath
 import pymysql
-
+import hashlib
+import re
+import warnings
+#warnings.filterwarnings('ignore')
 class ApiKey:
 
     @allure.step("发送get请求")
@@ -20,7 +23,7 @@ class ApiKey:
         """
         :param response: 返回的响应信息，默认为json格式
         :param jsonpath: jsonpath提取
-        :return:
+        :return:语法正确时以列表形式返回内容，错误时返回False
 
         """
         dict_data = json.loads(response)
@@ -28,23 +31,35 @@ class ApiKey:
 
 
     @allure.step("获取需获取的接口关联信息（keys和values）")
-    def joinlist(self,list1, list2):
+    def joinlist(self, txt, list1, list2):
         '''
         :param list1: json键值名列表
         :param list2: json values列表
         :return:        {键值: values}
         '''
+        var = []
         if list1:
-        # 分割Key值
+            # 分割Key值
             varKey = list1.split(';')
         else:
             return {}
         if list2:
-        # 分割Values
+            # 分割Values
             varValues = list2.split(';')
-        # 组装成新字典并返回
-            return {i: j for i in varKey for j in varValues}
+            print('varValues值为',varValues)
+        # 获取报文中varValues对应的json值，并赋值到varKey
+        for varValue in varValues:
+            result = self.get_text(txt, varValue)
+            print(result[0])
+            var.append(result[0])
+            print('var=', var)
+        # 组装成新字典并返回{varKey[i]:var[i]}
+        if len(varKey) != len(var):
+            raise IndexError("变量名与变量值个数不相等，请检查修改")
+        else:
+            return {varKey[i]:var[i] for i in range(len(varKey))}
 
+    @allure.step("数据库检查")
     def sqlCheck(self, sql, n=1):
         conn = pymysql.connect(
             host='shop-xo.hctestedu.com',
@@ -62,6 +77,18 @@ class ApiKey:
         # 返回执行结果
         return cmd.fetchmany(n)
 
+    # MD5加密 不可逆
+    @allure.step("MD5单向加密")
+    def get_md5(self, str, salt=None):
+        obj = hashlib.md5(salt.encode('utf-8'))
+        obj.update(str.encode('utf-8'))
+        result = obj.hexdigest()
+        return result
+
+    @allure.step("进行正则匹配")
+    def regular_assert(self, txt, pattern):
+        result = re.search(pattern, txt)
+        print(f"正则匹配结果为{result.group(1)}")
 
 if __name__ == '__main__':
     ak = ApiKey()
@@ -78,6 +105,6 @@ if __name__ == '__main__':
     # #print(res.json()["msg"])
     # result = ak.get_text(res.text, "$.msg")
     # print(result)
-    result = ak.sqlCheck("select * from sxo_power")
-    print(result)
+    # result = ak.sqlCheck("select * from sxo_power")
+    # print(result)
 

@@ -15,7 +15,8 @@ if __name__ == '__main__':
     # os.system("allure serve result")
     os.system("allure generate ./result -o ./report")
 
-
+    # jenkins运行时输入以下句子(指定需要执行的测试用例范围)
+    # python -s test_exce_main.py --alluredir ./allure_report
 
 #
 # class LogicGate:
@@ -225,5 +226,3 @@ if __name__ == '__main__':
 #     return c
 # b()()
 # print(b())
-
-

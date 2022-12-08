@@ -29,6 +29,8 @@ def test_01(fix_1):
         api = "api/goods/detail"
         url = URL+"?s="+api
         res = ak.post(url=url, params=params, json=data)
+        print(res.request.url)
+        print(res.request.headers)
         print(res.text)
 if __name__ == '__main__':
     pytest.main(['-sv','./test_DS_004.py'])

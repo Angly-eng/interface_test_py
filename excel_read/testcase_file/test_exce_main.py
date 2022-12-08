@@ -52,23 +52,30 @@ def test_01(data):
 
     # 返回报文详情
     try:
+        print(f"============执行测试案例{data[0]}=================")
         res = getattr(ak, data[3])(url=data[1]+data[2], params=param, json=jdata, headers=header)
+        print(res.text)
     except Exception as e:
         print("==================请求参数有误===================")
         print(e)
     finally:
-        print(res.text)
+        # print(res.content.decode(encoding='utf-8'))
+            pass
 
 
     # 结果校验:实际结果==预期结果
     expected = data[9]
+    print(data[9])
     reality = ak.get_text(res.text, data[8])
-    assert expected != reality, "返回结果与预期结果不符"
+    print(f"实际结果为{reality[0]},期望结果为{expected}")
+    assert expected == reality[0], "返回结果与预期结果不符"
 
     # 接口关联信息获取
-    temp_dict = ak.joinlist(data[12], data[13])
+    global all_values
+    temp_dict = ak.joinlist(res.text, data[12], data[13])
     all_values.update(temp_dict)
-
+    print(all_values)
+    print("============案例执行完毕=================")
 
 if __name__ == '__main__':
     if __name__ == '__main__':

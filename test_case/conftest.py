@@ -5,7 +5,7 @@ from VAR import *
 from intf_keywords.api_key import ApiKey
 
 
-@pytest.fixture(scope="session")
+#@pytest.fixture(scope="session")
 def fix_1():
     params = {
         "application": "app",
@@ -23,6 +23,11 @@ def fix_1():
     # print(res.json()["msg"])
     with allure.step(f"获取{USRNAME}账户的token"):
         token = ak.get_text(res.text, "$..token")[0]
+    # 正则匹配
+    # ak.regular_assert(res.text, r'"token":"(.*?)"')
+    print(res.text)
     print(token)
     return ak, token
 
+if __name__ == '__main__':
+    fix_1()
