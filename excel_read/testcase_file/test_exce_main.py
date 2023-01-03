@@ -18,6 +18,11 @@ def setup_module():
 @pytest.mark.parametrize('data',readExcel(PATH, SHEET))
 @allure.epic("读取excel文件进行测试")
 def test_01(data):
+    # 用例是否跳过
+    if data[20]:
+        print(f"{data[0]}用例已设置“跳过”")
+        return
+
     # 用例名
     allure.dynamic.title(data[11])
     # 小模块

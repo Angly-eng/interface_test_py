@@ -19,3 +19,5 @@ def test_login():
     # print(res.json()["msg"])
     result = ak.get_text(res.text, "$.msg")
     print(result)
+if __name__ == '__main__':
+    test_login()

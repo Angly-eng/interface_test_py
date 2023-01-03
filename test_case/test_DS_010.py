@@ -22,4 +22,8 @@ def test_02():
         "application_client_type": "weixin"
     }
     res = ak.get(url="http://shop-xo.hctestedu.com/index.php?s=api/user/reg", json=data, params=params)
+
+    print("返回报文如下：\n")
     print(res.text)
+if __name__ == '__main__':
+    test_02()

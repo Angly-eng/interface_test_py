@@ -23,3 +23,5 @@ def test_03():
         }
         res = ak.post(url="http://shop-xo.hctestedu.com/index.php?s=api/user/reg", json=data, params=params)
         print(res.text)
+if __name__ == '__main__':
+    test_03()

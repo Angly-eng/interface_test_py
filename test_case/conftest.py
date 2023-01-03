@@ -5,7 +5,7 @@ from VAR import *
 from intf_keywords.api_key import ApiKey
 
 
-#@pytest.fixture(scope="session")
+@pytest.fixture(scope="session")
 def fix_1():
     params = {
         "application": "app",
@@ -25,8 +25,8 @@ def fix_1():
         token = ak.get_text(res.text, "$..token")[0]
     # 正则匹配
     # ak.regular_assert(res.text, r'"token":"(.*?)"')
-    print(res.text)
-    print(token)
+    # print(res.text)
+    print("已获取的token值为", token)
     return ak, token
 
 if __name__ == '__main__':

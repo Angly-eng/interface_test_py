@@ -10,14 +10,17 @@ import warnings
 #warnings.filterwarnings('ignore')
 class ApiKey:
 
+    # GET请求
     @allure.step("发送get请求")
     def get(self, url, json, params, **kwargs):
         return requests.get(url=url, json=json, params=params, **kwargs)
 
+    # POST请求
     @allure.step("发红POST请求")
     def post(self, url, json, params, **kwargs):
         return requests.post(url=url, json=json, params=params, **kwargs)
 
+    # json提取器
     @allure.step("获取返回的结果")
     def get_text(self,response, path):
         """
@@ -29,7 +32,13 @@ class ApiKey:
         dict_data = json.loads(response)
         return jsonpath.jsonpath(dict_data, path)
 
+    # reg提取器
+    @allure.step("进行正则匹配")
+    def regular_assert(self, txt, pattern):
+        result = re.search(pattern, txt)
+        print(f"正则匹配结果为{result.group(1)}")
 
+    # 提取excel中的所需的关联信息
     @allure.step("获取需获取的接口关联信息（keys和values）")
     def joinlist(self, txt, list1, list2):
         '''
@@ -59,6 +68,7 @@ class ApiKey:
         else:
             return {varKey[i]:var[i] for i in range(len(varKey))}
 
+    # 数据库校验
     @allure.step("数据库检查")
     def sqlCheck(self, sql, n=1):
         conn = pymysql.connect(
@@ -79,32 +89,39 @@ class ApiKey:
 
     # MD5加密 不可逆
     @allure.step("MD5单向加密")
-    def get_md5(self, str, salt=None):
+    def get_md5(self, str, salt=''):
         obj = hashlib.md5(salt.encode('utf-8'))
         obj.update(str.encode('utf-8'))
         result = obj.hexdigest()
         return result
 
-    @allure.step("进行正则匹配")
-    def regular_assert(self, txt, pattern):
-        result = re.search(pattern, txt)
-        print(f"正则匹配结果为{result.group(1)}")
+    # DES加密
+    @allure.step("des加密")
+    def get_md5(self, str, salt=''):
+        
+
 
 if __name__ == '__main__':
     ak = ApiKey()
-    # params = {
-    #     "application": "app",
-    #     "application_client_type": "weixin"
-    # }
-    # data = {
-    #     "accounts": "zz",
-    #     "pwd": "123456",
-    #     "type": "username"
-    # }
-    # res = ak.post(url="http://shop-xo.hctestedu.com/index.php?s=api/user/login",json=data,params=params)
-    # #print(res.json()["msg"])
-    # result = ak.get_text(res.text, "$.msg")
-    # print(result)
+    # 调试：json提取器
+    params = {
+        "application": "app",
+        "application_client_type": "weixin"
+    }
+    data = {
+        "accounts": "zz",
+        "pwd": "123456",
+        "type": "username"
+    }
+    res = ak.post(url="http://shop-xo.hctestedu.com/index.php?s=api/user/login",json=data,params=params)
+    #print(res.json()["msg"])
+    result = ak.get_text(res.text, "$.msg")
+    print(result[0])
+
+    # 调试：数据库检核
     # result = ak.sqlCheck("select * from sxo_power")
-    # print(result)
+
+    # 调试：md5加密
+    #result = ak.get_md5("测试")
+    #print(result)
 

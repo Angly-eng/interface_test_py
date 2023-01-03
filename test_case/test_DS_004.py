@@ -4,7 +4,6 @@ import pytest
 
 import allure
 from VAR import *
-from deepdiff import DeepDiff
 from intf_keywords.api_key import ApiKey
 # DS_004 商品详情-验证输入的商品ID不存在提示用户
 # 01 执行登陆获取token
@@ -13,7 +12,7 @@ def test_01(fix_1):
     print(f"======================正在执行{__name__}01=================")
     with allure.step("01 执行登陆获取token"):
         ak, token = fix_1
-        print(token)
+        print(f"============token值为{token}==============")
 
 # 02 查询商品详情10是有的，101是没有的
     print(f"======================正在执行{__name__}02=================")
@@ -29,8 +28,8 @@ def test_01(fix_1):
         api = "api/goods/detail"
         url = URL+"?s="+api
         res = ak.post(url=url, params=params, json=data)
-        print(res.request.url)
-        print(res.request.headers)
-        print(res.text)
+        # print(res.request.url)
+        # print(res.request.headers)
+        print("===================\n", res.text, "\n==================")
 if __name__ == '__main__':
-    pytest.main(['-sv','./test_DS_004.py'])
+    pytest.main(['-s','./test_DS_004.py'])
