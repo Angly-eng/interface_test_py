@@ -10,7 +10,7 @@ def login():
     # 登录成功返回信息
     succmsg = {
         'token': 'zxcdc',
-        'msg': '登录成功'
+        'msg': 'success'
     }
     # 登录失败返回信息
     failmsg = {
@@ -33,7 +33,7 @@ def getuserinfo():
     # 请求头{"token":  all_values['var_token']}
     print(request.headers)
     _succmsg = {
-        'nickname': "风清扬",
+        'nikename': "风清扬",
         'openid': 1
     }
     _failmsg={
@@ -52,4 +52,4 @@ def getuserinfo():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(debug=False)

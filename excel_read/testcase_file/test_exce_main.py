@@ -72,11 +72,11 @@ def test_01(data):
     expected = data[9]
     print(data[9])
     reality = ak.get_text(res.text, data[8])
-    print(f"实际结果为{reality[0]},期望结果为{expected}")
+    print(f"实际结果为{str(reality[0])},期望结果为{expected}")
     assert expected == reality[0], "返回结果与预期结果不符"
 
     # 接口关联信息获取
-    global all_values
+    global all_values0
     temp_dict = ak.joinlist(res.text, data[12], data[13])
     all_values.update(temp_dict)
     print(all_values)
