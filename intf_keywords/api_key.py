@@ -25,7 +25,7 @@ class ApiKey:
     def get_text(self,response, path):
         """
         :param response: 返回的响应信息，默认为json格式
-        :param jsonpath: jsonpath提取
+        :param path: jsonpath提取
         :return:语法正确时以列表形式返回内容，错误时返回False
 
         """
@@ -97,8 +97,8 @@ class ApiKey:
 
     # DES加密
     @allure.step("des加密")
-    def get_md5(self, str, salt=''):
-        
+    def get_des(self, str, salt=''):
+        pass
 
 
 if __name__ == '__main__':
